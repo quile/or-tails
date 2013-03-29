@@ -44,9 +44,12 @@ var app = {
         
         console.log("Device ready");
         
+        Parse.initialize( ORTails.credentials.API_KEY, ORTails.credentials.JAVASCRIPT_KEY );
+
         app.views["login"] = new view_login();
         app.views["park"] = new view_park();
         app.views["map"] = new view_map();
+        app.views["doglist"] = new list_view("dog-list", "Dog");
 
        $("#btn_login").on("touchstart", function() {
             console.log("showing login view");
@@ -66,13 +69,17 @@ var app = {
 
         for(var view in app.views){
             console.log("INIT: " + view);
+
             app.views[view].initialize();
         }
 
         console.log("App initialized done.");
 
         $(".nav").on("touchstart", function() {
-            console.log($(this).attr("data-target"));
+            var target = $(this).attr("data-target");
+            if(app.views[target]){
+                app.showView(target);
+            }
         });
     },
 
