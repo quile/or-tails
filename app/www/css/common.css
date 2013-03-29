@@ -35,3 +35,35 @@ body {
 	height:30px;
 	background-color:#c0c0c0;
 }
+
+#dog-list {
+	height:100%;
+	width:100%;
+}
+
+.list-view {
+
+}
+
+.list-container {
+	overflow:auto;
+	width:100%;
+}
+
+.row {
+	height:30px;
+}
+
+.row.touched {
+	background-color:red;
+}
+
+.row .title {
+	float:left;
+	height:30px;
+}
+.row .arrow{
+	float:right;
+	width:30px;
+	height:30px;
+}

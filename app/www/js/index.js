@@ -46,10 +46,17 @@ var app = {
         
         Parse.initialize( ORTails.credentials.API_KEY, ORTails.credentials.JAVASCRIPT_KEY );
 
+        app.views["park-detail"] = new static_view("park-detail");
+        app.views["park-map"] = new static_view("park-map");
+        app.views["checkin"] = new static_view("checkin");
+        
+        
+        
         app.views["login"] = new view_login();
         app.views["park"] = new view_park();
         app.views["map"] = new view_map();
-        app.views["doglist"] = new list_view("dog-list", "Dog");
+        app.views["dog-detail"] = new dog_detail();
+        app.views["doglist"] = new list_view("dog-list", "Dog", "dog-detail", "");
 
        $("#btn_login").on("touchstart", function() {
             console.log("showing login view");
@@ -114,9 +121,9 @@ var app = {
         $(".visible").removeClass("visible");
         app.views[view].$container.addClass("visible");
 
-        app.views[view].show();
+        app.views[view].show(params);
 
-        console.log("Done with showView");
+        console.log("Done with showView, container:" + app.views[view].$container.hasClass("visible"));
     }
 
 

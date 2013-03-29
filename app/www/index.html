@@ -36,18 +36,40 @@
             <span id="app-title"></span>
         </div>
         <div id="app-frame">
+            
             <div id="login" class="view visible">LOGIN VIEW
                 <a href="test.html">Try test page</a>
             </div>
+            
             <div id="park" class="view">PARK VIEW</div>
+
             <div id="map" class="view">
                 <div id="map-container"></div>
                 <div id="map-footer">
                     <input class="nav" data-target="doglist" type="button" id="show-doglist" value="dogs">
                     <input class="nav" data-target="checkin" type="button" id="set-status" value="check in">
-                    <input class="nav" data-target="parklist" type="button" id="show-parklist" value="parks"></div>
+                    <input class="nav" data-target="parklist" type="button" id="show-parklist" value="parks">
+                </div>
             </div>
-            <div id="dog-list"></div>
+
+           
+
+            <div id="park-map" class="view">park detail map view</div>
+            
+            <div id="checkin" class="view">check out/in page</div>
+            
+            <div id="dog-list" class="view list-view">
+                <div class="list-container"></div>
+            </div>
+            
+            <div id="park-list" class="view list-view">
+                <div class="list-container"></div>
+            </div>
+            
+            <div id="dog-detail" class="view">Dog Profile PAGE</div>
+            
+            
+            <div id="park-detail" class="view">Park Profile</div>
         </div>
         <script type="text/javascript" src="cordova-2.5.0.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
@@ -55,15 +77,17 @@
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.2.min.js"></script>
         <script type="text/javascript" src="js/schema.js"></script>
         <script type="text/javascript" src="js/or-tails.js"></script>
+        <script type="text/javascript" src="js/static_view.js"></script>
         <script type="text/javascript" src="js/map.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
         <script type="text/javascript" src="js/park.js"></script>
         <script type="text/javascript" src="js/list_view.js"></script>
+        <script type="text/javascript" src="js/dog_detail.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
         <script type="text/javascript">
             app.initialize();
-            app.setView("login");
+            app.setView("dog-detail");
         </script>
     </body>
 </html>
