@@ -56,12 +56,37 @@ var schema = {
                 error: function(e) {
                     callback( e, null );
                 }
-            });            
+            });
         }
     }, {
         all: function(callback) {
             var query = new Parse.Query(schema.Dog);
             utils.find( query, callback );
+        },
+        active: function(callback) {
+            var query = new Parse.Query(schema.Dog);
+            utils.find( query, function( error, dogs ) {
+                if (error) {
+                    callback( error, [] );
+                    return;
+                }
+                var active = [];
+                for (var i = 0; i < dogs.length; i++) {
+                    var park = dogs[i].get("park");
+                    if (park) {
+                        active.push(park);
+                    }
+                }
+                callback( null, active );
+            });
+        },
+        mine: function( callback ) {
+            var me = Parse.User.current();
+            if (!me) {
+                callback("Not logged in", []);
+                return;
+            }
+            callback( null, me.get("dogs") );
         }
     }),
 
@@ -78,5 +103,31 @@ var schema = {
             var query = new Parse.Query(schema.Park);
             utils.find( query, callback );
         },
+        active: function(callback) {
+            var query = new Parse.Query(schema.Dog);
+            utils.find( query, function( error, dogs ) {
+                if (error) {
+                    callback( error, [] );
+                    return;
+                }
+                var parks = {};
+                var active = [];
+                for (var i = 0; i < dogs.length; i++ ) {
+                    var park = dogs[i].get("park");
+                    if (park && !parks[park.id]) {
+                        active.push(park);
+                        parks[park.id] = true;
+                    }
+                }
+                callback( null, active );
+            });
+        },
+        near: function( callback ) {
+            var me = Parse.User.current();
+            if (!me) {
+                callback("Not logged in", []);
+            }
+            me.nearbyParks( callback );
+        }
     })
 };
