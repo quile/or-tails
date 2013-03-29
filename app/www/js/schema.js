@@ -7,10 +7,19 @@ var utils = {
             error:   function(error)   { callback( error, null ) }
         });
     },
+    
     nearest: function( what, location, callback ) {
         var query = new Parse.Query(what);
         query.near("location", location);
         utils.find( query, callback );
+    },
+    
+    withId: function( what, id, callback ) {
+        var query = new Parse.Query(what);
+        query.get(id, {
+            success: function(result) { callback( null, result ) },
+            error:   function(error)   { callback( error, null ) }
+        });
     }
 };
 
@@ -59,6 +68,10 @@ var schema = {
             });
         }
     }, {
+        withId: function( id, callback ) {
+            utils.withId( schema.Dog, id, callback );
+        },
+        
         all: function(callback) {
             var query = new Parse.Query(schema.Dog);
             utils.find( query, callback );
@@ -99,6 +112,9 @@ var schema = {
             return this.get("location");
         }
     }, {
+        withId: function( id, callback ) {
+            utils.withId( schema.Park, id, callback );
+        },
         all: function(callback) {
             var query = new Parse.Query(schema.Park);
             utils.find( query, callback );

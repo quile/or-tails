@@ -45,7 +45,13 @@
                         me.nearbyParks( function(error, results) {
                             document.write("- found parks");
                             park = results[0];
-                            fido.activate( park, function(error, results) { document.write( "Activated" + results ) } );
+                            fido.activate( park, function(error, results) {
+                                document.write( "- Activated fido" + results );
+                                
+                                fido.deactivate( function( error, results ) {
+                                    document.write(" - Deactivated fido");
+                                });
+                            } );
                         });
                     }
                 },
@@ -53,7 +59,6 @@
                     document.write("shitballs, login failure " + e);
                 }
             });
-            
             
           } else {
             document.write("Making new fido!");
