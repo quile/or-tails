@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>ORTails</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.2.min.js"></script>
+</head>
+  <script type="text/javascript" src="js/schema.js"></script>
+  <script type="text/javascript" src="js/or-tails.js"></script>
+
+<body>
+
+  <div id="main">
+    <h1>Test</h1>
+  </div>
+
+  <script type="text/javascript">
+ 
+
+  //function testParse() {
+      document.write("Hellloooo");
+    //console.log("Hello world");
+      Parse.initialize( ORTails.credentials.API_KEY, ORTails.credentials.JAVASCRIPT_KEY );
+
+      var findFido = new Parse.Query(ORTails.schema.Dog);
+      findFido.equalTo("name", "Fido");
+
+      var fido;
+      findFido.find({
+        success: function(results) {
+          if (results.length > 0) {
+            document.write("Found fido!");
+            fido = results[0];
+          } else {
+            document.write("Making new fido!");
+            fido = new ORTails.schema.Dog();
+            fido.save({
+                name: "Fido",
+                breed: "Pug",
+                birthYear: 2008,
+                lovedSince: 2008,
+                gender: "MALE",
+                weight: 25,
+                aboutMe: "I like pie",
+                picture: null,
+                favoritePark: "Instrument Outpost", // change this to an id?
+                favoriteTreats: [
+                  "carrots",
+                  "chocolate",
+                  "rotting fish carcasses"
+                ],
+                behaviourProfile: {
+                },
+                rating: "GREEN"
+              }, {
+              success: function(object) {
+                console.log("successfully saved " + object.name);
+              },
+              error: function(model, error) {
+                console.log("failed to save " + object.name);
+              }
+            });
+          }
+        },
+        error: function(e) {
+          console.log("Oops" + e);
+        }
+      }); 
+
+    //}
+    // instrument output gps: 
+    // lat: 45.525954 long: -122.65595
+    //document.addEventListener('deviceready', testParse, false);
+  </script>
+</body>
+
+</html>
