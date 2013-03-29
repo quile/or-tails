@@ -17,10 +17,14 @@
  * under the License.
  */
 var app = {
+
+    views : {},
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
     },
+
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
@@ -33,17 +37,62 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        
+        console.log("App initialized.");
+        
+        app.views["login"] = new view_login();
+        app.views["park"] = new view_park();
+        app.views["map"] = new view_map();
+        //console.log("App initialized 1.");
+
+        $("#btn_login").on("click", function() {
+            console.log("showing login view");
+            app.showView("login");
+        });
+
+        $("#btn_map").on("click", function() {
+            console.log("showing map view");
+            app.showView("map");
+        });
+
+        $("#btn_park").on("click", function() {
+            console.log("showing park view");
+            app.showView("park");
+        });
+
+        for(var view in app.views){
+            app.views[view].initialize();
+        }
+
+        console.log("App initialized done.");
+    },
+
+    loadViews : function() {
+         //app.views["login"] = new view_login();
+        //app.views["park"] = new view_park();
+        //app.views["map"] = new view_map();
+        console.log("views initialized 1.");
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+      /*  var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        console.log('Received Event: ' + id);*/
+    },
+
+    showView : function(view, params) {
+        
+
+        $(".visible").removeClass("visible");
+        app.views[view].$container.addClass("visible");
+
+        app.views[view].show();
+
+        console.log("Done with showView");
     }
 };
