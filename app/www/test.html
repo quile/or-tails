@@ -34,6 +34,28 @@
           if (results.length > 0) {
             document.write("Found fido!");
             fido = results[0];
+            var park;
+            var me;
+            
+            Parse.User.logIn( "stumptownkiwi", "dawkins", {
+                success: function( u ) {
+                    document.write("- Logged user in");
+                    me = u;
+                    if (me) {
+                        me.nearbyParks( function(error, results) {
+                            document.write("- found parks");
+                            park = results[0];
+                            fido.activate( park, function(error, results) { document.write( "Activated" + results ) } );
+                        });
+                    }
+                },
+                error: function( e ) {
+                    document.write("shitballs, login failure " + e);
+                }
+            });
+
+            
+            
           } else {
             document.write("Making new fido!");
             fido = new ORTails.schema.Dog();
@@ -69,7 +91,7 @@
           console.log("Oops" + e);
         }
       }); 
-
+    
     //}
     // instrument output gps: 
     // lat: 45.525954 long: -122.65595

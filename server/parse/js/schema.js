@@ -54,6 +54,6 @@ var schema = {
     all: function(callback) {
       var query = new Parse.Query(schema.Park);
       utils.find( query, callback );
-    },
+    }
   })
 };
