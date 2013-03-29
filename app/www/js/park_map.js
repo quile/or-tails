@@ -1,17 +1,31 @@
-var view_parkmap = function() {
+var park_map = function() {
+
+	//var map;
+	var $container = $("#park-map");
+	var parkId = null;
+
+	var showParkDetails = function(id){
+		parkId = id;
+		$container.html("Loading park: " + id);
+	};
+
+	var initMap = function() {
+
+	}
 
 	return {
-		$container : $("#park-map"),
+		$container : $container,
 
 		initialize : function() {
 		},
 
 		show : function(params){
-			console.log("Showing parkmap.");
+			showParkDetails(params);
+			initMap();
 		},
 
 		getState : function() {
-			return {};
+			return parkId;
 		}
 	}
 };

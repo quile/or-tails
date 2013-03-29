@@ -47,18 +47,22 @@ var app = {
         Parse.initialize( ORTails.credentials.API_KEY, ORTails.credentials.JAVASCRIPT_KEY );
 
         app.views["park-detail"] = new static_view("park-detail");
-        app.views["park-map"] = new static_view("park-map");
+        app.views["park-map"] = new park_map();
         app.views["checkin"] = new static_view("checkin");
-        
-        
         
         app.views["login"] = new view_login();
         app.views["park"] = new view_park();
         app.views["map"] = new view_map();
+
         app.views["dog-detail"] = new dog_detail();
         app.views["doglist"] = new list_view("dog-list", "Dog", "dog-detail", "");
 
-       $("#btn_login").on("touchstart", function() {
+
+        $("#btn_back").on("touchstart", function() {
+            app.goBack();
+        });
+
+        $("#btn_login").on("touchstart", function() {
             console.log("showing login view");
             app.showView("login");
         });
@@ -70,7 +74,7 @@ var app = {
 
         $("#btn_park").on("touchstart", function() {
             console.log("showing park view");
-            app.showView("park");
+            app.showView("park-map");
         });
 
 
@@ -88,6 +92,9 @@ var app = {
                 app.showView(target);
             }
         });
+
+        // set initial page.
+        app.showView("login");
     },
 
     loadViews : function() {
@@ -113,18 +120,27 @@ var app = {
         $("#app-title").html(title);
     },
 
-    showView : function(view, params) {
-        if(app.currentView){
-            app.viewStack.push( {"view" : app.currentView, "state" : app.views[app.currentView].getState() } );
+    showView : function(view, params, skipHistory) {
+
+        if(!skipHistory){
+            app.viewStack.push( {"view" : view, "params" : params } );
         }
 
         $(".visible").removeClass("visible");
         app.views[view].$container.addClass("visible");
-
         app.views[view].show(params);
-
+        
         console.log("Done with showView, container:" + app.views[view].$container.hasClass("visible"));
-    }
+    },
 
+    goBack : function() {
+        if(app.viewStack.length >= 1){
+            app.viewStack.pop();
+            var data = app.viewStack[app.viewStack.length - 1];
+            app.showView(data.view, data.params, true);
+        } else {
+            console.log("no history to pop..");
+        }
+    }
 
 };

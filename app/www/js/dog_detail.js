@@ -1,6 +1,7 @@
 var dog_detail = function() {
 
 	var $container = $("#dog-detail");
+	var dogId = null;
 	
 	return {
 		$container : $container,
@@ -9,9 +10,20 @@ var dog_detail = function() {
 		},
 
 		show : function(params){
-			console.log("Showing dog detail page: " + params);
-			//schema.Dog.
-			$container.html("Dog details for id: " + params);
+			dogId = params;
+			
+			$container.html("Fetching hound data...");
+
+			schema.Dog.withId(params, function(error, result){
+				if(!error){
+					$container.html("Details for: " + result.get("name"));
+				}	
+			});
+			
+		}, 
+
+		getState : function(){
+			return dogId;
 		}
 	}
 };
