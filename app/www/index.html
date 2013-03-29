@@ -33,13 +33,21 @@
             <input type="button" id="btn_login" value="login">
             <input type="button" id="btn_map" value="map">
             <input type="button" id="btn_park" value="park">
+            <span id="app-title"></span>
         </div>
         <div id="app-frame">
-            <div id="login" class="view">LOGIN VIEW</div>
-            <div id="park" class="view">PARK VIEW</div>
-            <div id="map" class="view">MAP VIEW
-                <div id="map-container"></div>
+            <div id="login" class="view visible">LOGIN VIEW
+                
             </div>
+            <div id="park" class="view">PARK VIEW</div>
+            <div id="map" class="view">
+                <div id="map-container"></div>
+                <div id="map-footer">
+                    <input class="nav" data-target="doglist" type="button" id="show-doglist" value="dogs">
+                    <input class="nav" data-target="checkin" type="button" id="set-status" value="check in">
+                    <input class="nav" data-target="parklist" type="button" id="show-parklist" value="parks"></div>
+            </div>
+
         </div>
         <script type="text/javascript" src="cordova-2.5.0.js"></script>
         <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
@@ -50,20 +58,8 @@
         <script type="text/javascript" src="js/index.js"></script>
 
         <script type="text/javascript">
-
-            /*window.onerror = function(message, url, lineNumber) {
-                console.log("Error: "+message+" in "+url+" at line "+lineNumber);
-            }*/
-
-          //  document.addEventListener('deviceready', app.onDeviceReady, false);
-            //document.addEventListener('deviceready', this.onDeviceReady, false);
-             
-           
             app.initialize();
-
-           // $(document).on("ready", function() {
-               
-            //})
+            app.setView("login");
         </script>
     </body>
 </html>

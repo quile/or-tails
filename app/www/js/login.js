@@ -8,6 +8,10 @@ var view_login = function() {
 
 		show : function(params){
 			console.log("Showing login.");
+		},
+
+		getState : function() {
+			return {};
 		}
 	}
 };

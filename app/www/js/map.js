@@ -1,9 +1,12 @@
 var view_map = function() {
 
 	var map;
+	var $container = $("#map");
 
 	function createMap(){
+
 		console.log("Creating map?");
+		
 		var mapOptions = {
 	      center: new google.maps.LatLng(45.52594, -122.65595),
 	          zoom: 14,
@@ -11,13 +14,11 @@ var view_map = function() {
 	          mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };
 	        
-	    map = new google.maps.Map($("#map-container").get(0), mapOptions);
-
-	    console.log("Map created.");
+	    map = new google.maps.Map( $("#map-container").get(0), mapOptions );
 	}
 
 	return {
-		$container : $("#map"),
+		$container : $container,
 
 		initialize : function() {
 			createMap();
@@ -27,6 +28,10 @@ var view_map = function() {
 			console.log("Showing map.");
 
 			createMap();
+		},
+
+		getState : function() {
+			return {};
 		}
 	} 
 };

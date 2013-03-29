@@ -8,6 +8,10 @@ var view_park = function() {
 
 		show : function(params){
 			console.log("Showing park details.");
+		},
+
+		getState : function() {
+			return {};
 		}
 	}
 };

@@ -20,6 +20,10 @@ var app = {
 
     views : {},
 
+    viewStack : [],
+
+    currentView : "login",
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -38,39 +42,45 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         
-        console.log("App initialized.");
+        console.log("Device ready");
         
         app.views["login"] = new view_login();
         app.views["park"] = new view_park();
         app.views["map"] = new view_map();
-        //console.log("App initialized 1.");
 
-        $("#btn_login").on("click", function() {
+       $("#btn_login").on("touchstart", function() {
             console.log("showing login view");
             app.showView("login");
         });
 
-        $("#btn_map").on("click", function() {
+        $("#btn_map").on("touchstart", function() {
             console.log("showing map view");
             app.showView("map");
         });
 
-        $("#btn_park").on("click", function() {
+        $("#btn_park").on("touchstart", function() {
             console.log("showing park view");
             app.showView("park");
         });
 
+
         for(var view in app.views){
+            console.log("INIT: " + view);
             app.views[view].initialize();
         }
 
         console.log("App initialized done.");
+
+        $(".nav").on("touchstart", function() {
+            console.log($(this).attr("data-target"));
+        });
     },
 
     loadViews : function() {
          //app.views["login"] = new view_login();
         //app.views["park"] = new view_park();
-        //app.views["map"] = new view_map();
+        //app.views["map"] = new view_map(); ij  
+
         console.log("views initialized 1.");
     },
     // Update DOM on a Received Event
@@ -85,8 +95,14 @@ var app = {
         console.log('Received Event: ' + id);*/
     },
 
+    setTitle : function(title){
+        $("#app-title").html(title);
+    },
+
     showView : function(view, params) {
-        
+        if(app.currentView){
+            app.viewStack.push( {"view" : app.currentView, "state" : app.views[app.currentView].getState() } );
+        }
 
         $(".visible").removeClass("visible");
         app.views[view].$container.addClass("visible");
@@ -95,4 +111,6 @@ var app = {
 
         console.log("Done with showView");
     }
+
+
 };

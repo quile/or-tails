@@ -29,3 +29,9 @@ body {
 	height:400px;
 	overflow:hidden;
 }
+
+#map-container #footer {
+	bottom:0px;
+	height:30px;
+	background-color:#c0c0c0;
+}
