@@ -15,6 +15,45 @@ body {
 	height: 100%;
 }
 
+#map-footer {
+	position: fixed;
+	bottom: 0;
+	z-index: 100;
+	height: 84px;
+	width: 100%;
+	background-color: #88C7D1;
+	/*box-shadow: 0 0 10px #000000;*/
+}
+
+#map-footer DIV {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	display: inline-block;
+	width: 32%;
+	height: 38px;
+	text-align: center;
+	background-color: #88C7D1;
+	padding-top: 55px;
+}
+
+#map-footer #show-doglist {
+	background: transparent url( ../img/dogs.svg ) no-repeat;
+	background-position: 50% 30%;
+	background-size: 30px 30px;
+}
+
+#map-footer #set-status {
+	background: transparent url( ../img/checkin.svg ) no-repeat;
+	background-position: 50% 30%;
+	background-size: 30px 30px;
+}
+
+#map-footer #show-parklist {
+	background: transparent url( ../img/parks.svg ) no-repeat;
+	background-position: 50% 30%;
+	background-size: 30px 30px;
+}
 
 #app-frame .view {
 	display:none;
@@ -66,20 +105,30 @@ body {
 .list-container {
 	overflow:auto;
 	width:100%;
+	background:#333333;
 }
 
 .row {
-	height:30px;
-	line-height:30px;
+	position: relative;
+	list-style: none;
+	margin: 0;
+	padding: 24px 0 0 84px;
+	height: 40px;
+	width: 100%;
+	overflow: hidden;
+	background:#333333;
+	background-repeat: no-repeat;
+	color:white;
 }
 
 .row.touched {
-	background-color:red;
+	background-color: #555555;
 }
 
 .row .title {
 	float:left;
 	height:30px;
+	color:white;
 }
 .row .arrow{
 	float:right;
