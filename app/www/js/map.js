@@ -9,17 +9,22 @@ var view_map = function() {
 		
 		if(!map){
 			console.log("Creating map?");
-
+			
 			var mapOptions = {
 		      center: new google.maps.LatLng(45.52594, -122.65595),
 		          zoom: 14,
 		          disableDefaultUI: true,
-		          mapTypeId: google.maps.MapTypeId.ROADMAP
+		           mapTypeId: 'styled',
+		           mapTypeControlOptions: {
+            			mapTypeIds: [ 'styled']
+          		  }
 		    };
-		        
+
 		    map = new google.maps.Map( $("#map-container").get(0), mapOptions );
-		}
-        
+
+		    var styledMapType = new google.maps.StyledMapType(app.map_style, { name: 'styled' });
+       	    map.mapTypes.set('styled', styledMapType);
+        }
         // locate user and move map
         /*
         var me = Parse.User.current();
@@ -36,7 +41,7 @@ var view_map = function() {
         );
 		*/
 
-		// remove markers.
+		// remove markers
 		for(var i = 0; i < parks.length; i++){
 			parks[i].marker.setMap(null);
 		}
@@ -47,6 +52,7 @@ var view_map = function() {
 				for(var i = 0; i < result.length; i++){
 					var marker = new google.maps.Marker( {
 						map : map,
+						animation: google.maps.Animation.DROP,
 						position: new google.maps.LatLng( result[i].get("location").latitude, result[i].get("location").longitude )
 					})
 					registerMarkerEvents(marker, result[i].id);
@@ -70,9 +76,6 @@ var view_map = function() {
 		initialize : function() {
 			//createMap();
             
-            if (!me) {
-                app.showView("login");
-            }
             
             $("check-in").click(function(el) {
                 var self = this;

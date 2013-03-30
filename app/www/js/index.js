@@ -18,6 +18,34 @@
  */
 var app = {
 
+    map_style : [
+        {
+        "featureType": "road",
+        "stylers": [
+          { "visibility": "simplified" },
+          { "color": "#ffffff" },
+          { "weight": 1 }
+        ]
+        },{
+            "featureType": "administrative",
+            "stylers": [
+              { "visibility": "simplified" }
+            ]
+        },{
+            "featureType": "water",
+            "stylers": [
+              { "visibility": "on" },
+              { "color": "#87c6d0" }
+            ]
+        },{
+            "featureType": "administrative",
+            "stylers": [
+              { "color": "#7a9770" },
+              { "visibility": "off" }
+            ]
+        }
+    ],
+
     views : {},
 
     viewStack : [],
@@ -80,16 +108,19 @@ var app = {
 
         for(var view in app.views){
             console.log("INIT: " + view);
-
             app.views[view].initialize();
         }
 
         console.log("App initialized done.");
 
         $(".nav").on("touchstart", function() {
+            
             var target = $(this).attr("data-target");
             if(app.views[target]){
+                console.log("Showing:" + target);
                 app.showView(target);
+            } else {
+                console.log("no view:" + target);
             }
         });
 
