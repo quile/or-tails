@@ -69,35 +69,15 @@ var view_map = function() {
 
 		initialize : function() {
 			//createMap();
-            
-            if (!me) {
-                app.showView("login");
-            }
-            
-            $("set-status").click(function(el) {
-                var self = this;
-                e.preventDefault();
-                self.checkIn();
-            });
-
 		},
 
 		show : function(params) {
 			console.log("Showing map.");
-
 			createMap();
 		},
 
 		getState : function() {
 			return {};
-		},
-        
-        checkIn: function() {
-            var me = Parse.User.current();
-            if (!me) {
-                app.showView("login");
-            }
-            app.showView("checkIn");            
-        }
+		}
 	} 
 };

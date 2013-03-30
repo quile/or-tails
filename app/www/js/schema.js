@@ -34,6 +34,14 @@ var schema = {
         },
         nearbyParks: function( callback ) {
             utils.nearest( schema.Park, this.get("location"), callback );
+        },
+        nearestPark: function( callback ) {
+            this.nearbyParks( function( error, results ) {
+                if (error) { callback(error, null); return }
+                if (results.length > 0) {
+                    callback( null, results[0] );
+                }
+            });
         }
     }, {
 
