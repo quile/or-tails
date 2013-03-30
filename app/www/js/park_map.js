@@ -25,17 +25,18 @@ var park_map = function() {
 				});
 
 				$list.html("Loading hounds..");
-				result.dogs( function(error, result){
+				result.dogs( function(error, dogs){
 					if(!error){
-						console.log(result.length + " dogs at the park");
-						if(result.length == 0){
+						console.log(dogs.length + " dogs at the park");
+						if(dogs.length == 0){
 							$list.html('<div class="row">There aren\'t any dogs at this park.</div>');
 						}
 						else{
-							for(var i = 0; i < result.length; i++){
+                            $list.empty();
+							for(var i = 0; i < dogs.length; i++){
 								var row = document.createElement("div");
 								row.className = "row";
-								row.innerHTML = result[i].get("name");
+								row.innerHTML = dogs[i].get("name");
 								$list.append(row);
 							}
 						}

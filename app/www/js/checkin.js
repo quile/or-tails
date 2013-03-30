@@ -13,9 +13,9 @@ var view_checkin = function(id) {
             console.log("show checkin view");
             
             var me = Parse.User.current();
-
+            console.log( me.username );
             console.log( me );
-            var dogsList = $("#checkin-dogs");
+            var dogsList = $("#checkin-dogs").empty();
             console.log( me.get("dogs") );
             var dogs = {};
 
@@ -26,7 +26,7 @@ var view_checkin = function(id) {
                 } );
             });
             
-            var parksList = $("#checkin-parks");
+            var parksList = $("#checkin-parks").empty();
             
             var parks = {};
             
