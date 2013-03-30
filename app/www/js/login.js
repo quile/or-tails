@@ -37,11 +37,11 @@ var view_login = function() {
         
 		show : function(params){
 			console.log("Showing login.");
-            var me = Parse.User.current();
-            if (me) {
-                console.log("User " + me.get("name") + " is already authenticated");
-                app.showView("map");
-            }
+//            var me = Parse.User.current();
+//            if (me) {
+//                console.log("User " + me.id + " is already authenticated");
+//                app.showView("map");
+//            }
 		},
 
 		getState : function() {
