@@ -11,8 +11,8 @@ var park_map = function() {
 		schema.Park.withId(id, function(error, result) {
 			if(!error){
 
-				//app.setTitle("Park: " + result.get("name"));
-				$("#parkmap-title").html( result.get("name") );
+				app.setTitle(result.get("name"));
+				//$("#parkmap-title").html( result.get("name") );
 				var parkLocation = new google.maps.LatLng( result.get("location").latitude, result.get("location").longitude );
 				
 				map.setCenter(parkLocation);
@@ -75,6 +75,7 @@ var park_map = function() {
 		show : function(params){
 			initMap();
 			showParkDetails(params);
+			app.showBackButton();
 		},
 
 		getState : function() {

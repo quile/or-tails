@@ -4,15 +4,32 @@ body {
 }
 
 #header{
+	text-align:center;
 	height:32px;
+	background-color:#88C7D1;
+}
+
+#btn_back.hidden {
+	display:none;
 }
 
 #app-frame{
+
 }
 
 .view {
 	width: 100%;
 	height: 100%;
+}
+
+#btn_back{
+	position:absolute;
+	top:5px;
+	left:5px;
+}
+
+#app-title {
+	line-height:32px;
 }
 
 #map-footer {
@@ -93,19 +110,21 @@ body {
 }
 
 
+#park-list,
 #dog-list {
 	height:100%;
 	width:100%;
+	background-color:#333333;
 }
 
 .list-view {
-
+	background-color:#333333;
 }
 
 .list-container {
 	overflow:auto;
 	width:100%;
-	background:#333333;
+	background-color:#333333;
 }
 
 .row {

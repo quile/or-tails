@@ -83,7 +83,8 @@ var app = {
         app.views["map"] = new view_map();
 
         app.views["dog-detail"] = new dog_detail();
-        app.views["doglist"] = new list_view("dog-list", "Dog", "dog-detail", "");
+        app.views["doglist"] = new list_view("dog-list", "Dog", "dog-detail", "The Pack");
+        app.views["parklist"] = new list_view("park-list", "Park", "park-detail", "Parks");
 
 
         $("#btn_back").on("touchstart", function() {
@@ -151,12 +152,16 @@ var app = {
         $("#app-title").html(title);
     },
 
+    showBackButton : function(){
+        $("#btn_back").removeClass("hidden");
+    },
+
     showView : function(view, params, skipHistory) {
 
         if(!skipHistory){
             app.viewStack.push( {"view" : view, "params" : params } );
         }
-
+        $("#btn_back").addClass("hidden");
         $(".visible").removeClass("visible");
         app.views[view].$container.addClass("visible");
         app.views[view].show(params);

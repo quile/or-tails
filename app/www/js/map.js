@@ -85,6 +85,7 @@ var view_map = function() {
 
 		show : function(params) {
 			console.log("Showing map.");
+			app.setTitle("Find a Park");
 			createMap();
 		},
 

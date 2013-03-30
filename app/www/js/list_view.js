@@ -1,4 +1,4 @@
-var list_view = function(elementId, objectType, detailView) {
+var list_view = function(elementId, objectType, detailView, title) {
 	
 	var $container = $("#" + elementId);
 	var $list = $container.find(".list-container");
@@ -7,6 +7,8 @@ var list_view = function(elementId, objectType, detailView) {
 	var dataTypeName = objectType;
 
 	var detailViewName = detailView;
+
+	var pageTitle = (title != null) ? title : "";
 
 	function loadList() {
 		
@@ -58,6 +60,8 @@ var list_view = function(elementId, objectType, detailView) {
 
 		show : function(state){
 			loadList();
+			app.showBackButton();
+			app.setTitle(pageTitle);
 		},
 
 		getState : function() {
