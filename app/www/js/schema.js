@@ -95,7 +95,7 @@ var schema = {
                 for (var i = 0; i < dogs.length; i++) {
                     var park = dogs[i].get("park");
                     if (park) {
-                        active.push(park);
+                        active.push(dogs[i]);
                     }
                 }
                 callback( null, active );
@@ -120,13 +120,15 @@ var schema = {
             return this.get("location");
         },
         dogs: function( callback ) {
+            var self = this;
             schema.Dog.active( function(error, results) {
+                console.log("found " + results.length + " active dogs yeah");
                 var parkDogs = [];
-                for (var i=0; i<results; i++) {
-                    if (results[i].get("park").id === this.id) {
-                        parkDogs.push(results[i]);
+                $(results).each( function(index, item) {
+                    if (item.get("park").id === self.id ) {
+                        parkDogs.push(item);
                     }
-                }
+                });
                 callback( error, parkDogs );
             });
         }

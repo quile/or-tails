@@ -23,6 +23,7 @@ var view_login = function() {
                     success: function( user ) {
                         $("login-messages").hide();
                         console.log("logged " + username + " in");
+                        console.log( user.get("dogs"));
                         app.showView("map");
                     },
                     error: function( error ) {
