@@ -74,7 +74,7 @@ var view_map = function() {
                 app.showView("login");
             }
             
-            $("check-in").click(function(el) {
+            $("set-status").click(function(el) {
                 var self = this;
                 e.preventDefault();
                 self.checkIn();
@@ -97,8 +97,7 @@ var view_map = function() {
             if (!me) {
                 app.showView("login");
             }
-            var location = me.location();
-            
+            app.showView("checkIn");            
         }
 	} 
 };

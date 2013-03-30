@@ -47,11 +47,11 @@ var app = {
         Parse.initialize( ORTails.credentials.API_KEY, ORTails.credentials.JAVASCRIPT_KEY );
 
         app.views["park-detail"] = new static_view("park-detail");
-        app.views["park-map"] = new park_map();
-        app.views["checkin"] = new static_view("checkin");
+        app.views["park-map"] = new park_map();        
         
         app.views["login"] = new view_login();
         app.views["park"] = new view_park();
+        app.views["checkin"] = new view_checkin();
         app.views["map"] = new view_map();
 
         app.views["dog-detail"] = new dog_detail();
