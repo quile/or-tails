@@ -110,6 +110,17 @@ var schema = {
         },
         location: function() {
             return this.get("location");
+        },
+        dogs: function( callback ) {
+            schema.Dog.active( function(error, results) {
+                var parkDogs = [];
+                for (var i=0; i<results; i++) {
+                    if (results[i].get("park").id === this.id) {
+                        parkDogs.push(results[i]);
+                    }
+                }
+                callback( error, parkDogs );
+            });
         }
     }, {
         withId: function( id, callback ) {

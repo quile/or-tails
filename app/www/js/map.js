@@ -19,6 +19,22 @@ var view_map = function() {
 		        
 		    map = new google.maps.Map( $("#map-container").get(0), mapOptions );
 		}
+        
+        // locate user and move map
+        /*
+        var me = Parse.User.current();
+        var currentPosition = navigator.geolocation.getCurrentPosition(
+            function(point) {
+                map.setCenter( new google.maps.LatLng( point.coords.latitude, point.coords.longitude ) );
+                me.setLocation( point.coords.latitude, point.coords.longitude, function(error, result) {
+                    console.log("Changed user's location to " + point.coords.latitude + " / " + points.coords.longitude );
+                });
+            },
+            function(error) {
+                console.log("Couldn't get GPS position");
+            }
+        );
+		*/
 
 		// remove markers.
 		for(var i = 0; i < parks.length; i++){
@@ -38,7 +54,6 @@ var view_map = function() {
 				}
 			}
 		});
-
 		
 	}
 
@@ -54,6 +69,17 @@ var view_map = function() {
 
 		initialize : function() {
 			//createMap();
+            
+            if (!me) {
+                app.showView("login");
+            }
+            
+            $("check-in").click(function(el) {
+                var self = this;
+                e.preventDefault();
+                self.checkIn();
+            });
+
 		},
 
 		show : function(params) {
@@ -64,6 +90,15 @@ var view_map = function() {
 
 		getState : function() {
 			return {};
-		}
+		},
+        
+        checkIn: function() {
+            var me = Parse.User.current();
+            if (!me) {
+                app.showView("login");
+            }
+            var location = me.location();
+            
+        }
 	} 
 };
